@@ -10,6 +10,14 @@
 	"scripts": {
 		"build": "tsc"
 	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/cypcz/nameday-api"
+	},
+	"bugs": {
+		"url": "https://github.com/cypcz/nameday-api/issues"
+	},
+	"homepage": "https://github.com/cypcz/nameday-api",
 	"keywords": [
 		"nameday",
 		"api"
