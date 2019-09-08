@@ -8,7 +8,7 @@
 		"dist"
 	],
 	"scripts": {
-		"build": "tsc"
+		"build": "rm -r dist && tsc"
 	},
 	"repository": {
 		"type": "git",

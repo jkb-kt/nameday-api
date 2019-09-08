@@ -49,7 +49,29 @@ export type Day =
 
 export type Month = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
-const today = async (countryCode?: CountryCode) => {
+export interface Response {
+	day: number;
+	month: number;
+	name_us?: string;
+	name_cz?: string;
+	name_sk?: string;
+	name_fr?: string;
+	name_hu?: string;
+	name_hr?: string;
+	name_se?: string;
+	name_at?: string;
+	name_it?: string;
+	name_de?: string;
+	name_es?: string;
+	name_pl?: string;
+}
+
+export interface ResponseSpecific {
+	calendar: string;
+	results: { day: number; month: number; name: string }[];
+}
+
+const today = async (countryCode?: CountryCode): Promise<Response> => {
 	if (countryCode) {
 		return fetch(
 			`https://api.abalin.net/get/today?country=${countryCode}`
@@ -61,7 +83,7 @@ const today = async (countryCode?: CountryCode) => {
 	}
 };
 
-const tomorrow = (countryCode?: CountryCode) => {
+const tomorrow = (countryCode?: CountryCode): Promise<Response> => {
 	if (countryCode) {
 		return fetch(
 			`https://api.abalin.net/get/tomorrow?country=${countryCode}`
@@ -73,7 +95,7 @@ const tomorrow = (countryCode?: CountryCode) => {
 	}
 };
 
-const yesterday = (countryCode?: CountryCode) => {
+const yesterday = (countryCode?: CountryCode): Promise<Response> => {
 	if (countryCode) {
 		return fetch(
 			`https://api.abalin.net/get/yesterday?country=${countryCode}`
@@ -85,7 +107,11 @@ const yesterday = (countryCode?: CountryCode) => {
 	}
 };
 
-const specificDay = (day: Day, month: Month, countryCode: CountryCode) => {
+const specificDay = (
+	day: Day,
+	month: Month,
+	countryCode: CountryCode
+): Promise<Response> => {
 	if (countryCode) {
 		return fetch(
 			`https://api.abalin.net/get/namedays?day=${day}&month=${month}&country=${countryCode}`
@@ -97,7 +123,10 @@ const specificDay = (day: Day, month: Month, countryCode: CountryCode) => {
 	}
 };
 
-const searchByName = (name: string, countryCode: CountryCode) => {
+const searchByName = (
+	name: string,
+	countryCode: CountryCode
+): Promise<ResponseSpecific> => {
 	return fetch(
 		`https://api.abalin.net/get/getdate?name=${name}&calendar=${countryCode}`
 	).then(res => res.json().then(data => data));
