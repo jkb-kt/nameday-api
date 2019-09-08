@@ -47,7 +47,9 @@ When using country codes in the library you can use either **country names** or 
 ##### Import
 
 ```javascript
-const nameday = require("nameday-api");
+const nameday = require("nameday-api").default;
+// OR
+import nameday from "nameday-api";
 ```
 
 ##### Request name days for today / tomorrow / yesterday
