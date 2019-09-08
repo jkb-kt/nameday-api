@@ -1,0 +1,29 @@
+{
+	"name": "nameday-api",
+	"version": "1.0.0",
+	"description": "This library makes it easy to send requests towards api.abalin.net API. API provides name days for various countries.",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "tsc"
+	},
+	"keywords": [
+		"nameday",
+		"api"
+	],
+	"author": "Jakub Kot",
+	"license": "MIT",
+	"dependencies": {
+		"node-fetch": "^2.6.0"
+	},
+	"devDependencies": {
+		"@types/node-fetch": "^2.5.0",
+		"@typescript-eslint/eslint-plugin": "^1.13.0",
+		"@typescript-eslint/parser": "^1.13.0",
+		"eslint": "^6.1.0",
+		"typescript": "^3.6.2"
+	}
+}
