@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 
-export type Country =
+export type CountryCode =
 	| "us"
 	| "cz"
 	| "sk"
@@ -49,10 +49,10 @@ export type Day =
 
 export type Month = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
-const today = async (country?: Country) => {
-	if (country) {
+const today = async (countryCode?: CountryCode) => {
+	if (countryCode) {
 		return fetch(
-			`https://api.abalin.net/get/today?country=${country}`
+			`https://api.abalin.net/get/today?country=${countryCode}`
 		).then(res => res.json().then(data => data.data));
 	} else {
 		return fetch("https://api.abalin.net/get/today").then(res =>
@@ -61,10 +61,10 @@ const today = async (country?: Country) => {
 	}
 };
 
-const tomorrow = (country?: Country) => {
-	if (country) {
+const tomorrow = (countryCode?: CountryCode) => {
+	if (countryCode) {
 		return fetch(
-			`https://api.abalin.net/get/tomorrow?country=${country}`
+			`https://api.abalin.net/get/tomorrow?country=${countryCode}`
 		).then(res => res.json().then(data => data.data));
 	} else {
 		return fetch("https://api.abalin.net/get/tomorrow").then(res =>
@@ -73,10 +73,10 @@ const tomorrow = (country?: Country) => {
 	}
 };
 
-const yesterday = (country?: Country) => {
-	if (country) {
+const yesterday = (countryCode?: CountryCode) => {
+	if (countryCode) {
 		return fetch(
-			`https://api.abalin.net/get/yesterday?country=${country}`
+			`https://api.abalin.net/get/yesterday?country=${countryCode}`
 		).then(res => res.json().then(data => data.data));
 	} else {
 		return fetch("https://api.abalin.net/get/yesterday").then(res =>
@@ -85,10 +85,10 @@ const yesterday = (country?: Country) => {
 	}
 };
 
-const specificDay = (day: Day, month: Month, country: Country) => {
-	if (country) {
+const specificDay = (day: Day, month: Month, countryCode: CountryCode) => {
+	if (countryCode) {
 		return fetch(
-			`https://api.abalin.net/get/namedays?day=${day}&month=${month}&country=${country}`
+			`https://api.abalin.net/get/namedays?day=${day}&month=${month}&country=${countryCode}`
 		).then(res => res.json().then(data => data.data));
 	} else {
 		return fetch(
@@ -97,12 +97,12 @@ const specificDay = (day: Day, month: Month, country: Country) => {
 	}
 };
 
-const searchDayByName = (name: string, country: Country) => {
+const searchByName = (name: string, countryCode: CountryCode) => {
 	return fetch(
-		`https://api.abalin.net/get/getdate?name=${name}&calendar=${country}`
+		`https://api.abalin.net/get/getdate?name=${name}&calendar=${countryCode}`
 	).then(res => res.json().then(data => data));
 };
 
-const nameday = { today, tomorrow, yesterday, specificDay, searchDayByName };
+const nameday = { today, tomorrow, yesterday, specificDay, searchByName };
 
-module.exports = nameday;
+export default nameday;
