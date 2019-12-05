@@ -1,16 +1,45 @@
+import fetch from "isomorphic-fetch";
+
 export type CountryCode =
-  | "us"
-  | "cz"
-  | "sk"
-  | "pl"
-  | "fr"
-  | "hu"
-  | "hr"
-  | "se"
   | "at"
+  | "dk"
+  | "fr"
   | "it"
+  | "sk"
+  | "cz"
+  | "es"
+  | "hr"
+  | "pl"
+  | "us"
   | "de"
-  | "es";
+  | "fi"
+  | "hu"
+  | "se";
+
+export type TimeZone =
+  | "America/Denver"
+  | "America/Costa_Rica"
+  | "America/Los_Angeles"
+  | "America/St_Vincent"
+  | "America/Toronto"
+  | "Europe/Amsterdam"
+  | "Europe/Monaco"
+  | "Europe/Prague"
+  | "Europe/Isle_of_Man"
+  | "Africa/Cairo"
+  | "Africa/Johannesburg"
+  | "Africa/Nairobi"
+  | "Asia/Yakutsk"
+  | "Asia/Hong_Kong"
+  | "Asia/Taipei"
+  | "Pacific/Midway"
+  | "Pacific/Honolulu"
+  | "Etc/GMT-6"
+  | "US/Samoa"
+  | "Zulu"
+  | "US/Hawaii"
+  | "Israel"
+  | "Etc/GMT-2";
 
 export type Day =
   | 1
@@ -48,89 +77,109 @@ export type Day =
 export type Month = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
 export interface Response {
-  day: number;
-  month: number;
-  name_us?: string;
-  name_cz?: string;
-  name_sk?: string;
-  name_fr?: string;
-  name_hu?: string;
-  name_hr?: string;
-  name_se?: string;
-  name_at?: string;
-  name_it?: string;
-  name_de?: string;
-  name_es?: string;
-  name_pl?: string;
+  dates: { day: Day; month: Month };
+  namedays: {
+    at?: string;
+    dk?: string;
+    fr?: string;
+    it?: string;
+    sk?: string;
+    cz?: string;
+    es?: string;
+    hr?: string;
+    pl?: string;
+    us?: string;
+    de?: string;
+    fi?: string;
+    hu?: string;
+    se?: string;
+  };
 }
 
 export interface ResponseSpecific {
-  calendar: string;
-  results: { day: number; month: number; name: string }[];
+  "country name": string;
+  "country code": CountryCode;
+  results: { day: Day; month: Month; name: string }[];
 }
 
-const today = async (countryCode?: CountryCode): Promise<Response> => {
-  if (countryCode) {
-    return fetch(
-      `https://api.abalin.net/get/today?country=${countryCode}`
-    ).then(res => res.json().then(data => data.data));
+const today = async (countryCode?: CountryCode, timeZone?: TimeZone): Promise<Response> => {
+  if (countryCode && timeZone) {
+    return fetch(`https://api.abalin.net/today?timezone=${timeZone}&country=${countryCode}`, {
+      cache: "no-store",
+    }).then(res => res.json().then(data => data.data[0]));
+  } else if (countryCode) {
+    return fetch(`https://api.abalin.net/today?country=${countryCode}`, {
+      cache: "no-store",
+    }).then(res => res.json().then(data => data.data[0]));
+  } else if (timeZone) {
+    return fetch(`https://api.abalin.net/today?timezone=${timeZone}`, {
+      cache: "no-store",
+    }).then(res => res.json().then(data => data.data[0]));
   } else {
-    return fetch("https://api.abalin.net/get/today").then(res =>
-      res.json().then(data => data.data)
-    );
+    return fetch("https://api.abalin.net/today", {
+      cache: "no-store",
+    }).then(res => res.json().then(data => data.data[0]));
   }
 };
 
-const tomorrow = (countryCode?: CountryCode): Promise<Response> => {
-  if (countryCode) {
-    return fetch(
-      `https://api.abalin.net/get/tomorrow?country=${countryCode}`
-    ).then(res => res.json().then(data => data.data));
+const tomorrow = (countryCode?: CountryCode, timeZone?: TimeZone): Promise<Response> => {
+  if (countryCode && timeZone) {
+    return fetch(`https://api.abalin.net/tomorrow?timezone=${timeZone}&country=${countryCode}`, {
+      cache: "no-store",
+    }).then(res => res.json().then(data => data.data[0]));
+  } else if (countryCode) {
+    return fetch(`https://api.abalin.net/tomorrow?country=${countryCode}`, {
+      cache: "no-store",
+    }).then(res => res.json().then(data => data.data[0]));
+  } else if (timeZone) {
+    return fetch(`https://api.abalin.net/tomorrow?timezone=${timeZone}`, {
+      cache: "no-store",
+    }).then(res => res.json().then(data => data.data[0]));
   } else {
-    return fetch("https://api.abalin.net/get/tomorrow").then(res =>
-      res.json().then(data => data.data)
-    );
+    return fetch("https://api.abalin.net/tomorrow", {
+      cache: "no-store",
+    }).then(res => res.json().then(data => data.data[0]));
   }
 };
 
-const yesterday = (countryCode?: CountryCode): Promise<Response> => {
-  if (countryCode) {
-    return fetch(
-      `https://api.abalin.net/get/yesterday?country=${countryCode}`
-    ).then(res => res.json().then(data => data.data));
+const yesterday = (countryCode?: CountryCode, timeZone?: TimeZone): Promise<Response> => {
+  if (countryCode && timeZone) {
+    return fetch(`https://api.abalin.net/yesterday?timezone=${timeZone}&country=${countryCode}`, {
+      cache: "no-store",
+    }).then(res => res.json().then(data => data.data[0]));
+  } else if (countryCode) {
+    return fetch(`https://api.abalin.net/yesterday?country=${countryCode}`, {
+      cache: "no-store",
+    }).then(res => res.json().then(data => data.data[0]));
+  } else if (timeZone) {
+    return fetch(`https://api.abalin.net/yesterday?timezone=${timeZone}`, {
+      cache: "no-store",
+    }).then(res => res.json().then(data => data.data[0]));
   } else {
-    return fetch("https://api.abalin.net/get/yesterday").then(res =>
-      res.json().then(data => data.data)
-    );
+    return fetch("https://api.abalin.net/yesterday", {
+      cache: "no-store",
+    }).then(res => res.json().then(data => data.data[0]));
   }
 };
 
-const specificDay = (
-  day: Day,
-  month: Month,
-  countryCode: CountryCode
-): Promise<Response> => {
+const specificDay = (day: Day, month: Month, countryCode: CountryCode): Promise<Response> => {
   if (countryCode) {
     return fetch(
-      `https://api.abalin.net/get/namedays?day=${day}&month=${month}&country=${countryCode}`
-    ).then(res => res.json().then(data => data.data));
+      `https://api.abalin.net/namedays?day=${day}&month=${month}&country=${countryCode}`,
+      { cache: "no-store" }
+    ).then(res => res.json().then(data => data.data[0]));
   } else {
-    return fetch(
-      `https://api.abalin.net/get/namedays?day=${day}&month=${month}`
-    ).then(res => res.json().then(data => data.data));
+    return fetch(`https://api.abalin.net/namedays?day=${day}&month=${month}`, {
+      cache: "no-store",
+    }).then(res => res.json().then(data => data.data[0]));
   }
 };
 
-const searchByName = (
-  name: string,
-  countryCode: CountryCode
-): Promise<ResponseSpecific> => {
-  return fetch(
-    `https://api.abalin.net/get/getdate?name=${name}&calendar=${countryCode}`
-  ).then(res => res.json().then(data => data));
+const searchByName = (name: string, countryCode: CountryCode): Promise<ResponseSpecific> => {
+  return fetch(`https://api.abalin.net/getdate?name=${name}&country=${countryCode}`, {
+    cache: "no-store",
+  }).then(res => res.json().then(data => data));
 };
-
-today("cz").then(res => console.log(res));
 
 const nameday = { today, tomorrow, yesterday, specificDay, searchByName };
 
