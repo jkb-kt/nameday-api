@@ -16,6 +16,12 @@ npm install nameday-api
 When using country codes in the library you can use **country codes**.
 
 - Country codes
+  - bg
+  - lt
+  - ee
+  - lv
+  - gr
+  - ru
   - at
   - dk
   - fr
