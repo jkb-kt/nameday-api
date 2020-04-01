@@ -118,19 +118,19 @@ const today = async (countryCode?: CountryCode, timeZone?: TimeZone): Promise<Re
   if (countryCode && timeZone) {
     return fetch(`https://api.abalin.net/today?timezone=${timeZone}&country=${countryCode}`, {
       cache: "no-store",
-    }).then(res => res.json().then(data => data.data[0]));
+    }).then(res => res.json().then(data => data.data));
   } else if (countryCode) {
     return fetch(`https://api.abalin.net/today?country=${countryCode}`, {
       cache: "no-store",
-    }).then(res => res.json().then(data => data.data[0]));
+    }).then(res => res.json().then(data => data.data));
   } else if (timeZone) {
     return fetch(`https://api.abalin.net/today?timezone=${timeZone}`, {
       cache: "no-store",
-    }).then(res => res.json().then(data => data.data[0]));
+    }).then(res => res.json().then(data => data.data));
   } else {
     return fetch("https://api.abalin.net/today", {
       cache: "no-store",
-    }).then(res => res.json().then(data => data.data[0]));
+    }).then(res => res.json().then(data => data.data));
   }
 };
 
@@ -138,19 +138,19 @@ const tomorrow = (countryCode?: CountryCode, timeZone?: TimeZone): Promise<Respo
   if (countryCode && timeZone) {
     return fetch(`https://api.abalin.net/tomorrow?timezone=${timeZone}&country=${countryCode}`, {
       cache: "no-store",
-    }).then(res => res.json().then(data => data.data[0]));
+    }).then(res => res.json().then(data => data.data));
   } else if (countryCode) {
     return fetch(`https://api.abalin.net/tomorrow?country=${countryCode}`, {
       cache: "no-store",
-    }).then(res => res.json().then(data => data.data[0]));
+    }).then(res => res.json().then(data => data.data));
   } else if (timeZone) {
     return fetch(`https://api.abalin.net/tomorrow?timezone=${timeZone}`, {
       cache: "no-store",
-    }).then(res => res.json().then(data => data.data[0]));
+    }).then(res => res.json().then(data => data.data));
   } else {
     return fetch("https://api.abalin.net/tomorrow", {
       cache: "no-store",
-    }).then(res => res.json().then(data => data.data[0]));
+    }).then(res => res.json().then(data => data.data));
   }
 };
 
@@ -158,19 +158,19 @@ const yesterday = (countryCode?: CountryCode, timeZone?: TimeZone): Promise<Resp
   if (countryCode && timeZone) {
     return fetch(`https://api.abalin.net/yesterday?timezone=${timeZone}&country=${countryCode}`, {
       cache: "no-store",
-    }).then(res => res.json().then(data => data.data[0]));
+    }).then(res => res.json().then(data => data.data));
   } else if (countryCode) {
     return fetch(`https://api.abalin.net/yesterday?country=${countryCode}`, {
       cache: "no-store",
-    }).then(res => res.json().then(data => data.data[0]));
+    }).then(res => res.json().then(data => data.data));
   } else if (timeZone) {
     return fetch(`https://api.abalin.net/yesterday?timezone=${timeZone}`, {
       cache: "no-store",
-    }).then(res => res.json().then(data => data.data[0]));
+    }).then(res => res.json().then(data => data.data));
   } else {
     return fetch("https://api.abalin.net/yesterday", {
       cache: "no-store",
-    }).then(res => res.json().then(data => data.data[0]));
+    }).then(res => res.json().then(data => data.data));
   }
 };
 
@@ -179,11 +179,11 @@ const specificDay = (day: Day, month: Month, countryCode: CountryCode): Promise<
     return fetch(
       `https://api.abalin.net/namedays?day=${day}&month=${month}&country=${countryCode}`,
       { cache: "no-store" }
-    ).then(res => res.json().then(data => data.data[0]));
+    ).then(res => res.json().then(data => data.data));
   } else {
     return fetch(`https://api.abalin.net/namedays?day=${day}&month=${month}`, {
       cache: "no-store",
-    }).then(res => res.json().then(data => data.data[0]));
+    }).then(res => res.json().then(data => data.data));
   }
 };
 
