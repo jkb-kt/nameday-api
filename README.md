@@ -9,6 +9,8 @@ API provides name days for various countries.
 
 ```bash
 npm install nameday-api
+// OR
+yarn add nameday-api
 ```
 
 ## List of supported countries
@@ -42,7 +44,7 @@ When using country codes in the library you can use **country codes**.
 ##### Import
 
 ```javascript
-const nameday = require("nameday-api").default;
+const nameday = require("nameday-api");
 // OR
 import nameday from "nameday-api";
 ```
